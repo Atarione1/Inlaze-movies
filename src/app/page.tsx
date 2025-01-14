@@ -9,17 +9,20 @@ import React, { useEffect, useState } from 'react'
 
 export default function Home() {
   const [data, setData] = useState<[]>([])
+  //# definir useSearchParams para obtener los query de paginado y tipo de consulta
   const searchParams = useSearchParams()
   const genre = searchParams.get('genre')
   const page = searchParams.get('page')
-  console.log(genre)
+
+  //# useEffect para inciar la pagina y cargar las peliculas 
   useEffect(() => {
     if (page === null) {
-      fgetPage()
+      firstgetPage()
     } else {
       getPage()
     }
   }, [genre])
+  //#opciones adicionales para llamar al servicio de Tmdb
   const options = {
     method: 'GET',
     headers: {
@@ -27,15 +30,8 @@ export default function Home() {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZjRhODgxM2QzZTUyNjZiMDNmMWMwNDMzNjNkMzMzNyIsIm5iZiI6MTczNjcwMjYyMi41NjgsInN1YiI6IjY3ODNmYTllMDY5MGFjMDZlNzdiNWNlZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CUy4WLDOaQaoFZ-LHj41Q2B04srCDPi4o8Xy0-t3esM'
     }
   };
-  async function getPage() {
-    const res = await fetch(`https://api.themoviedb.org/3${genre === 'fetchTopRated' ? `/movie/top_rated` : genre === 'fetchTrending' ? '/trending/all/week' : `/movie/popular`}?api_key=3f4a8813d3e5266b03f1c043363d3337&language=es&page=${page}`, options)
-    const data = await res.json()
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-    setData(data.results)
-  }
-  async function fgetPage() {
+  //# funcion asincrona para llamar al servicio tmdb por primera vez setear la data
+  async function firstgetPage() {
     const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=3f4a8813d3e5266b03f1c043363d3337&language=es&page=1`, options)
     const data = await res.json()
     if (!res.ok) {
@@ -43,7 +39,16 @@ export default function Home() {
     }
     setData(data.results)
   }
-
+  //# funcion asincrona para llamar al servicio tmdb segun la categoria que se desea y setear la data
+  async function getPage() {
+    //# por alguna razon no dejaba utilizar las variables de entorno con el prosses.env
+    const res = await fetch(`https://api.themoviedb.org/3${genre === 'fetchTopRated' ? `/movie/top_rated` : genre === 'fetchTrending' ? '/trending/all/week' : `/movie/popular`}?api_key=3f4a8813d3e5266b03f1c043363d3337&language=es&page=${page}`, options)
+    const data = await res.json()
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
+    setData(data.results)
+  }
 
   return (
     <div>
@@ -60,7 +65,6 @@ export default function Home() {
                 </div>
               </div>
               <div className='mx-auto container '>
-
                 <div className='rounded-lg rounded-b-lg mx-5 sm:mx-auto'>
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path || result.backdrop_path}`}

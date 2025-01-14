@@ -5,10 +5,11 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 
 function Favoritos() {
+  //# trae lo que hay en local storage
   const value = localStorage.getItem("favoritos") ?? []
+  //# estas lineas convierte el objeto a json y lo setea para su mapeo
   const fav = JSON.parse(value)
   const [storage] = useState(fav);
-
   return (
     <div className='w-screen h-screen bg-gray-100'>
       <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  bg-gray-100'>
