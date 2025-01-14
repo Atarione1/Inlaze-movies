@@ -1,36 +1,10 @@
 "use client"
+import { Genero, Movie, Props } from '@/interfaces/interfaces';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-export interface Props {
-  params: {
-    id: string;
-  },
-}
-interface Movie {
-  adult: boolean
-  backdrop_path: string
-  genres: {
-    id: number
-    name: string
-  }
-  homepage: string
-  id: number
-  imdb_id: string
-  original_title: string
-  overview: string
-  popularity: number
-  poster_path: string
-  release_date: string
-  runtime: number
-  tagline: string
-  title: string
-  vote_average: number
-  vote_count: number
 
-
-}
 function MoviePage({ params }: Props) {
   const [data, setData] = useState<Movie | any>()
   const router = useRouter()
@@ -59,7 +33,7 @@ function MoviePage({ params }: Props) {
 
   }
   return (
-    <div className='w-screen bg-gray-100 h-screen '>
+    <div className='w-screen bg-gray-100 h-[1000px] md:h-screen '>
       {data ? <div className='p-4 md:pt-8 flex flex-col md:flex-row content-center max-w-6xl mx-auto md:space-x-6'>
         <Image
           src={`https://image.tmdb.org/t/p/original/${data.backdrop_path || data.poster_path
@@ -94,8 +68,8 @@ function MoviePage({ params }: Props) {
           </p>
           <p className='mb-3 flex'>
             <span className='font-semibold mr-1'>Generos:</span>
-            {data.genres.map((gen: any, i) => (
-              <div key={i} className='mx-2 font-semibold text-blue-700'>
+            {data.genres.map((gen: Genero, i: number) => (
+              <div key={i} className='mx-2 font-semibold text-blue-700 truncate whitespace-nowrap overflow-ellipsis'>
                 <h1>{gen.name} </h1>
               </div>
             ))}

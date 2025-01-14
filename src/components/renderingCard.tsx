@@ -3,9 +3,18 @@ import Link from 'next/link'
 import React from 'react'
 
 function RenderingCard(data: any) {
+  interface page {
+    id: number
+    title: string
+    name: string
+    release_date: string
+    first_air_date: string
+    poster_path: string
+    backdrop_path: string
+  }
   return (
     <div><div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  bg-gray-100'>
-      {data.map((result: any, i) => (
+      {data.map((result: page, i: number) => (
         <div className='my-0 sm:my-5 ' key={i}>
           <Link href={`/movie/${result.id}`}>
             <div className='flex-col sm:grid sm:grid-cols-2 gap-x-2 justify-between sm:my-1 text-center w-full'>
@@ -27,9 +36,7 @@ function RenderingCard(data: any) {
                   className='rounded-lg hover:opacity-75 transition-opacity duration-300'
                 />
               </div>
-
             </div>
-
           </Link>
         </div>
       ))}

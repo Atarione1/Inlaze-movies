@@ -1,5 +1,5 @@
 "use client"
-import Pagination from '@/components/pagination';
+import { page } from '@/interfaces/interfaces';
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation';
@@ -33,7 +33,7 @@ export function SearchPage({ params }: Props) {
   return (
     <div>
       <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  bg-gray-100'>
-        {data.map((result: any, i) => (
+        {data.map((result: page, i) => (
           <div className='my-0 sm:my-5 ' key={i}>
             <Link href={`/movie/${result.id}`}>
               <div className='flex-col sm:grid sm:grid-cols-2 gap-x-2 justify-between sm:my-1 text-center w-full'>
