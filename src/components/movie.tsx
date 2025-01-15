@@ -22,6 +22,8 @@ function MovieP({ params }: { params: Props }) {
   //# renderizar el detalle de la movie
   useEffect(() => {
     getPage()
+    const favo = JSON.parse(localStorage.getItem("favoritos") ?? "[]")
+    setFav(favo)
   }, [])
 
   //# funcion asincrona para llamar el servicio que busca por id de la pelicula
