@@ -5,18 +5,14 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-interface Props {
-  params: {
-    name: string;
-  },
-}
-export function SearchPage({ params }: Props) {
+
+type Props = Promise<{ [name: string]: string }>
+function SearchPage({ params }: { params: Props }) {
   const [data, setData] = useState<[]>([])
-  //# capturar los el nombre de la url para hacer la busqueda
-  const search = params?.name
+  let search: string = ""
   //# definir useSearchParams para capturar la paginacion   
   const searchParams = useSearchParams()
-  const page = searchParams.get('page')
+  const page = searchParams.get('page') ?? "1"
   //# definir contador de la paginacion y pasarlo a entero
   const cont = parseInt(page, 10)
   //# cargar cargar datos de la consulta atravez de el useEffect
@@ -25,7 +21,9 @@ export function SearchPage({ params }: Props) {
   }, [])
   //# funcion asincrona para hacer llamado del servicio de la busqueda
   async function getPage() {
-    const searchTerm = await params?.name
+    const { name } = await params
+    const searchTerm = name
+    search = name
     const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=3f4a8813d3e5266b03f1c043363d3337&query=${searchTerm}&language=es&page=${cont}&include_adult=false`)
     const dataa = await res.json()
     if (!res.ok) {

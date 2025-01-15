@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 function Favoritos() {
   //# trae lo que hay en local storage
-  const value = localStorage.getItem("favoritos") ?? []
+  const value = localStorage.getItem("favoritos") ?? "[]"
   //# estas lineas convierte el objeto a json y lo setea para su mapeo
   const fav = JSON.parse(value)
   const [storage] = useState(fav);

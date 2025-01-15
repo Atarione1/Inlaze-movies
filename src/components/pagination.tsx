@@ -4,7 +4,7 @@ import React from 'react'
 function Pagination() {
   const searchParams = useSearchParams()
   const genre = searchParams.get('genre')
-  const page = searchParams.get('page')
+  const page = searchParams.get('page') ?? "1"
   const cont = parseInt(page, 10)
   return (
     <div className=' w-full mx-auto bg-gray-100'>

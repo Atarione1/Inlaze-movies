@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-function MoviePage({ params }: Props) {
+function MoviePage({ params }: { params: Props }) {
   const [data, setData] = useState<Movie | any>()
+
   const router = useRouter()
   //# obtener objeto dentro del local storage
-  const favoritos = localStorage.getItem("favoritos")
+  const favoritos = localStorage.getItem("favoritos") ?? "[]"
   //# convertir el objeto en json
-  const value = JSON.parse(favoritos) ?? []
+  const value = JSON.parse(favoritos)
   //# definir useState inicializado con lo que hay en el local storage
   const [fav, setFav] = useState(value)
 
@@ -25,7 +26,8 @@ function MoviePage({ params }: Props) {
 
   //# funcion asincrona para llamar el servicio que busca por id de la pelicula
   async function getPage() {
-    const movieID = await params?.id
+    const { id } = await params
+    const movieID = id
     const res = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=3f4a8813d3e5266b03f1c043363d3337&language=es`)
     const dataa = await res.json()
     //# respuesta si falla la consulta

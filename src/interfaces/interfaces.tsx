@@ -7,11 +7,8 @@ export interface page {
   poster_path: string
   backdrop_path: string
 }
-export interface Props {
-  params: {
-    id: string;
-  }
-}
+
+export type Props = Promise<{ id: string }>
 export interface Genero {
   id: number
   name: string
