@@ -4,10 +4,18 @@ import { page } from '@/interfaces/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
+export default function HomePage() {
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <Home />
+    </Suspense>
+  )
+}
 
-export default function Home() {
+function Home() {
   const [data, setData] = useState<[]>([])
   //# definir useSearchParams para obtener los query de paginado y tipo de consulta
   const searchParams = useSearchParams()

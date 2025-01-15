@@ -1,5 +1,16 @@
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
+
+
+
+export default function PaginationPage() {
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <Pagination />
+    </Suspense>
+  )
+}
 
 function Pagination() {
   const searchParams = useSearchParams()
@@ -44,5 +55,3 @@ function Pagination() {
     </div>
   )
 }
-
-export default Pagination

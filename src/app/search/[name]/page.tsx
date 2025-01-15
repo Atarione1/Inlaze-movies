@@ -3,10 +3,18 @@ import { page } from '@/interfaces/interfaces';
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
 
 type Props = Promise<{ [name: string]: string }>
+export default function SrPage({ params }: { params: Props }) {
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <SearchPage params={params} />
+    </Suspense>
+  )
+}
 function SearchPage({ params }: { params: Props }) {
   const [data, setData] = useState<[]>([])
   let search: string = ""
@@ -99,5 +107,3 @@ function SearchPage({ params }: { params: Props }) {
     </div>
   )
 }
-
-export default SearchPage
