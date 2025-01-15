@@ -1,4 +1,3 @@
-"use client"
 
 import SearchP from "@/components/search"
 import { Props } from "@/interfaces/interfaces"

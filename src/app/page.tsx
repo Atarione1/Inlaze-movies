@@ -1,5 +1,3 @@
-"use client";
-
 import Home from '@/components/home';
 import React, { Suspense } from 'react'
 

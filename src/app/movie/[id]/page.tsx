@@ -1,4 +1,3 @@
-"use client"
 
 import MovieP from "@/components/movie"
 import { Props } from "@/interfaces/interfaces"
