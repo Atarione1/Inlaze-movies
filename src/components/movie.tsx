@@ -3,6 +3,7 @@ import { Genero, Movie, Props } from '@/interfaces/interfaces';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner';
 
 function MovieP({ params }: { params: Props }) {
   const [data, setData] = useState<Movie | null>()
@@ -81,14 +82,14 @@ function MovieP({ params }: { params: Props }) {
               </div>
             ))}
           </p>
-          <button className='text-white bg-black rounded-lg w-40 h-10' onClick={() => setFav([...fav, data])} >
+          <button className='text-white bg-black rounded-lg w-40 h-10' onClick={() => { setFav([...fav, data]); toast.success('Movi agregada') }} >
             Añadir a favoritos
           </button>
         </div>
       </div> :
         <div className='text-center mt-10'>
           <h1>No se encontro Infomacion detallada sobre esta pelicula.</h1>
-          <button className='text-white bg-black rounded-lg w-20 h-10' onClick={() => router.push("/?genre=fetchPopular")} >
+          <button className='text-white bg-black rounded-lg w-20 h-10' onClick={() => { router.push("/?genre=fetchPopular") }} >
             Volver
           </button>
         </div>}
