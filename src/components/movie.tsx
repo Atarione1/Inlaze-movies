@@ -82,7 +82,7 @@ function MovieP({ params }: { params: Props }) {
               </div>
             ))}
           </p>
-          <button className='text-white bg-black rounded-lg w-40 h-10' onClick={() => { setFav([...fav, data]); toast.success('Movi agregada') }} >
+          <button className='text-white bg-black rounded-lg w-40 h-10' onClick={() => { setFav([...fav, data]); toast.success('Movie agregada') }} >
             Añadir a favoritos
           </button>
         </div>

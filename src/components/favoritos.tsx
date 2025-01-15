@@ -8,10 +8,11 @@ function Favoritos() {
   const [storage, setStorage] = useState([]);
   //# trae lo que hay en local storage
   useEffect(() => {
+    //# estas lineas convierte el objeto a json y lo setea para su mapeo
     const fav = JSON.parse(localStorage.getItem("favoritos") ?? "[]")
     setStorage(fav)
   }, [])
-  //# estas lineas convierte el objeto a json y lo setea para su mapeo
+
 
 
   return (

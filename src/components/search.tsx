@@ -10,7 +10,8 @@ type Props = Promise<{ [name: string]: string }>
 
 export default function SearchP({ params }: { params: Props }) {
   const [data, setData] = useState<[]>([])
-  let search: string = ""
+  const [search, setSearch] = useState("")
+
   //# definir useSearchParams para capturar la paginacion   
   const searchParams = useSearchParams()
   const page = searchParams.get('page') ?? "1"
@@ -24,7 +25,7 @@ export default function SearchP({ params }: { params: Props }) {
   async function getPage() {
     const { name } = await params
     const searchTerm = name
-    search = name
+    setSearch(name)
     const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=3f4a8813d3e5266b03f1c043363d3337&query=${searchTerm}&language=es&page=${cont}&include_adult=false`)
     const dataa = await res.json()
     if (!res.ok) {
