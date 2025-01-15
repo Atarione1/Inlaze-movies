@@ -23,6 +23,7 @@ export default function SearchP({ params }: { params: Props }) {
   }, [])
   //# funcion asincrona para hacer llamado del servicio de la busqueda
   async function getPage() {
+    //#obtener nombre de la busqueda
     const { name } = await params
     const searchTerm = name
     setSearch(name)
