@@ -1,3 +1,4 @@
+"use client"
 import { page } from "@/interfaces/interfaces"
 import Image from "next/image"
 import Link from "next/link"
