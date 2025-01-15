@@ -16,10 +16,12 @@ export interface Genero {
 export interface Movie {
   adult: boolean
   backdrop_path: string
+  first_air_date: string
+  name: string
   genres: {
     id: number
     name: string
-  }
+  }[]
   homepage: string
   id: number
   imdb_id: string

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function MoviePage({ params }: { params: Props }) {
-  const [data, setData] = useState<Movie | any>()
+  const [data, setData] = useState<Movie | null>()
 
   const router = useRouter()
   //# obtener objeto dentro del local storage
@@ -52,12 +52,12 @@ function MoviePage({ params }: { params: Props }) {
 
         <div className='p-2'>
           <h2 className='text-lg mb-3 font-bold'>
-            {data.title || data.name}
+            {data.title || data?.name}
           </h2>
           <p className='text-lg mb-3'>{data.overview}</p>
           <p className='mb-3'>
             <span className='font-semibold mr-1'>Fecha de lanzamiento:</span>
-            {data.release_date || data.first_air_date}
+            {data.release_date || data?.first_air_date}
           </p>
           <p className='mb-3'>
             <span className='font-semibold mr-1'>Rating:</span>
